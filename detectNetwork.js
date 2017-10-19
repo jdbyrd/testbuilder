@@ -13,13 +13,24 @@ var detectNetwork = function(cardNumber) {
   // The American Express network always starts with a 34 or 37 and is 15 digits long
 
   // Once you've read this, go ahead and try to implement this function, then return to the console.
-  if(cardNumber.length === 14 && (cardNumber.slice(0,2) == 38 || cardNumber.slice(0,2) == 39)){
-  	return 'Diner\'s Club';
-  }else if(cardNumber.length === 15 && (cardNumber.slice(0,2) == 34 || cardNumber.slice(0,2) == 37)){
-  	return 'American Express';
+  var firstTwo = cardNumber.slice(0,2); 
+  var cardLength = cardNumber.length;
+  if(cardNumber.length === 14 && (firstTwo === '38' || firstTwo === '39')){
+    return 'Diner\'s Club';
+  }else if(cardLength === 15 && (firstTwo === '34' || firstTwo === '37')){
+    return 'American Express';
+  }else if((cardLength === 13 || cardLength === 16 || cardLength === 19) && cardNumber.charAt(0) === '4'){
+    return 'Visa';
+  }else if(cardLength === 16 && (firstTwo === '51' || firstTwo === '52' || firstTwo === '53' || firstTwo === '54' || firstTwo === '55')){
+    return 'MasterCard';
   }else{
-  	return 'Other';
+    return 'Other';
   }
 };
 
+/*
+Nice work! Extend your function to support two popular networks, Visa and Mastercard:
 
+Visa always has a prefix of 4 and a length of 13, 16, or 19.
+MasterCard always has a prefix of 51, 52, 53, 54, or 55 and a length of 16.
+*/
