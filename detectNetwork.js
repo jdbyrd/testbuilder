@@ -16,11 +16,14 @@ var detectNetwork = function(cardNumber) {
   var firstTwo = cardNumber.slice(0,2);
   var firstThree = cardNumber.slice(0,3); 
   var firstFour = cardNumber.slice(0,4);
+  var firstSix = cardNumber.slice(0,6);
   var cardLength = cardNumber.length;
   if(cardNumber.length === 14 && (firstTwo === '38' || firstTwo === '39')){
     return 'Diner\'s Club';
   }else if(cardLength === 15 && (firstTwo === '34' || firstTwo === '37')){
     return 'American Express';
+  }else if((cardLength === 16 || cardLength === 18 || cardLength === 19) && (firstFour === '4903' || firstFour === '4905' || firstFour === '4911' || firstFour === '4936' || firstFour === '6333' || firstFour === '6759' || firstSix === '564182' || firstSix === '633110')){
+    return 'Switch';
   }else if((cardLength === 13 || cardLength === 16 || cardLength === 19) && cardNumber.charAt(0) === '4'){
     return 'Visa';
   }else if(cardLength === 16 && (firstTwo === '51' || firstTwo === '52' || firstTwo === '53' || firstTwo === '54' || firstTwo === '55')){
@@ -29,6 +32,8 @@ var detectNetwork = function(cardNumber) {
     return 'Discover';
   }else if((cardLength >= 12 && cardLength <= 19) && (firstFour === '5018' || firstFour === '5020' || firstFour === '5038' || firstFour === '6304')){
     return 'Maestro';
+  }else if((cardLength >= 16 || cardLength <= 19) && ((firstThree >= 624 && firstThree <= 626) || (firstFour >= 6282 && firstFour <= 6288) || (firstSix >= 622126 && firstSix <= 622925))){
+    return 'China UnionPay';
   }else{
     return 'Other';
   }
